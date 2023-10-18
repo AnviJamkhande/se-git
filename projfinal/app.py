@@ -1,12 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import matplotlib.pyplot as plt
-
+import hashlib
+import os
 
 # from chart_data import get_company_graph_data
-
 app = Flask(__name__)
 app.static_folder = 'static'
+# Generate a random secret key
+secret_key = os.urandom(24)
+app.secret_key = secret_key
+
 
 # Create a SQLite database for storing block names
 conn = sqlite3.connect('blocks.db')
@@ -80,9 +84,12 @@ cursor.execute('CREATE TABLE IF NOT EXISTS Blocks (id INTEGER PRIMARY KEY AUTOIN
 conn.commit()
 conn.close()
 
-# add button
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         new_block_name = request.form.get('new_block_name')
         if new_block_name:
@@ -95,9 +102,25 @@ def index():
             connect_to_database(new_block_name)
             add_block_to_database(new_block_name)
             block_names.append(new_block_name)
-
     return render_template('index.html', block_names=block_names)
 
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Hardcoded username and password for testing
+        if username == 'Anvi Jamkhande' and password == 'hello world':
+            session['logged_in'] = True
+            return redirect(url_for('index'))
+        else:
+            error_message = 'Invalid username or password'
+            return render_template('login.html', error_message=error_message)
+
+    return render_template('login.html')
 
 
 
@@ -120,13 +143,16 @@ def block(block_name):
 def analytics():
     return render_template('analytics.html')
 
-# @app.route('/Crif_India')
-# def Crif_India():
-#     return render_template('Crif_India.html')
+@app.route('/Crif_India')
+def Crif_India():
+    return render_template('Crif_India.html')
 
 
 @app.route('/block/<block_name>/add_company', methods=['GET', 'POST'])
 def add_company(block_name):
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+        
     if request.method == 'POST':
         company_name = request.form.get('company_name')
         company_type = request.form.get('company_type')

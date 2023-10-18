@@ -68,7 +68,8 @@
             <button type="submit" class="btn btn-primary">Add Place</button>
         </form>
 
-        <!-- <a href="{{ url_for('analytics') }}" class="btn">Display Analytics</a> -->
+        <a href="{{ url_for('analytics') }}" class="btn">Display Analytics</a>
+	
 
         {% if error_message %}
             <p>{{ error_message }}</p>
