@@ -147,9 +147,9 @@ def analytics():
 def Crif_India():
     return render_template('Crif_India.html')
 
-
 @app.route('/block/<block_name>/add_company', methods=['GET', 'POST'])
 def add_company(block_name):
+# checking if logged in
     if not session.get('logged_in'):
         return redirect(url_for('login'))
         
