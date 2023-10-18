@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ block_name }} - Add Company</title>
+    <style>
+        .add-company-form {
+            margin-top: 20px;
+        }
+
+        .add-company-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .add-company-form input[type="text"],
+        .add-company-form input[type="number"],
+        .add-company-form input[type="email"],
+        .add-company-form textarea {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ block_name }} - Add Company</h1>
+    <form class="add-company-form" method="POST" action="/block/{{ block_name }}/add_company">
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required>
+        <br>
+        <label for="company_type">Type:</label>
+        <input type="text" id="company_type" name="company_type">
+        <br>
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website">
+        <br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+        <br>
+        <label for="money_sponsored">Money Sponsored:</label>
+        <input type="number" id="money_sponsored" name="money_sponsored" step="0.01">
+        <br>
+        <label for="contact_email">Contact Email:</label>
+        <input type="text" id="contact_email" name="contact_email">
+        <br>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments"></textarea>
+        <br>
+        <input type="submit" value="Add Company">
+    </form>
+
+    
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Places in Pune</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: flex-start;
+            background-color: ivory;
+        }
+
+        .container {
+            
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        .block-label {
+            display: inline-block;
+            padding: 30px;
+            margin: 30px;
+            background-color: #a5c8ed;
+            color: #fff;
+            border-radius: 25px;
+        }
+
+        footer {
+          position: absolute;
+            bottom: 0;
+            margin-top: auto;
+            padding: 10px;
+            background-color: #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Places in Pune</h1>
+        </header>
+        <nav>
+            <ul>
+                {% for block_name in block_names %}
+                    <li class="block-label"><a href="{{ url_for('block', block_name=block_name) }}">{{ block_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <h3>Add a New Place</h3>
+        <form method="POST" action="{{ url_for('index') }}">
+            <div class="form-group">
+                <label for="new_block_name">Place Name:</label>
+                <input type="text" id="new_block_name" name="new_block_name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Place</button>
+        </form>
+
+        <!-- <a href="{{ url_for('analytics') }}" class="btn">Display Analytics</a> -->
+
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
+        <footer>
+            &copy; 2023 Block Companies. All rights reserved.
+        </footer>
+    </div>
+</body>
+</html>

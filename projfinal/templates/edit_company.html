@@ -1,0 +1,52 @@
+<!-- edit_company.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ block_name }} - Edit Company</title>
+    <style>
+        .edit-company-form {
+            margin-top: 20px;
+        }
+
+        .edit-company-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .edit-company-form input[type="text"],
+        .edit-company-form input[type="number"],
+        .edit-company-form input[type="email"],
+        .edit-company-form textarea {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ block_name }} - Edit Company</h1>
+    <form class="edit-company-form" method="POST" action="/block/{{ block_name }}/edit_company/{{ company_id }}">
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" value="{{ data[1] }}" required>
+        <br>
+        <label for="company_type">Type:</label>
+        <input type="text" id="company_type" name="company_type" value="{{ data[2] }}">
+        <br>
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" value="{{ data[3] }}">
+        <br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="{{ data[4] }}">
+        <br>
+        <label for="money_sponsored">Money Sponsored:</label>
+        <input type="number" id="money_sponsored" name="money_sponsored" value="{{ data[5] }}" step="0.01">
+        <br>
+        <label for="contact_email">Contact Email:</label>
+        <input type="email" id="contact_email" name="contact_email" value="{{ data[6] }}">
+        <br>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments">{{ data[7] }}</textarea>
+        <br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

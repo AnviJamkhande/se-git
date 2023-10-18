@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ block_name }} - Companies</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>{{ block_name }} - Companies</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Website</th>
+            <th>Location</th>
+            <th>Money Sponsored</th>
+            <th>Contact Email</th>
+            <th>Action</th>
+        </tr>
+        {% for row in data %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td><a href="{{ url_for('block', block_name=block_name) }}">{{ row[3] }}</a></td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>
+                  <a href="{{ url_for('view_company', block_name=block_name, company_id=row[0]) }}">View</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('add_company', block_name=block_name) }}">Add Company</a>
+    <br><br>
+    <a href="{{ url_for('index') }}">Back to Places in Pune</a>
+</body>
+</html>

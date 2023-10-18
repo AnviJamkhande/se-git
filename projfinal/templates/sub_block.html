@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ block_name }} - {{ data[1] }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>{{ block_name }} - {{ data[1] }}</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+      </ul>
+    </nav>
+    <h2>{{ data[1] }}</h2>
+    <p><strong>Type:</strong> {{ data[2] }}</p>
+    <p><strong>Website:</strong> {{ data[3] }}</p>
+    <p><strong>Location:</strong> {{ data[4] }}</p>
+    <p><strong>Money Sponsored:</strong> {{ data[5] }}</p>
+    <p><strong>Contact/email:</strong> {{ data[6] }}</p>
+    <p><strong>More information:</strong> {{ data[7] }}</p>
+    <footer>
+      &copy; 2023 Block Companies. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
